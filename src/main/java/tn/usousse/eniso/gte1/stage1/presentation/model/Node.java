@@ -1,9 +1,9 @@
 package tn.usousse.eniso.gte1.stage1.presentation.model;
 public class Node {
         private String value;
+        public boolean isLast=false;
         public Node next;
-
-        public Node(String value,Node next) {
+    public Node(String value, Node next) {
             this.value=value;
             this.next = next;
         }
@@ -31,4 +31,8 @@ public class Node {
                     ", next=" + next +
                     '}';
         }
+
+    public void setLast(boolean last) {
+        isLast = last;
     }
+}

@@ -3,6 +3,8 @@ package tn.usousse.eniso.gte1.stage1.service;
 import tn.usousse.eniso.gte1.stage1.presentation.model.Node;
 import tn.usousse.eniso.gte1.stage1.presentation.model.Table;
 
+import static java.lang.Math.abs;
+
 public class AppService {
     Table table;
 
@@ -20,15 +22,14 @@ public class AppService {
 
     public int hachF(String value) {
         int s = 0;
-        if (value != null) {
-            for (char ch : value.toCharArray()) {
-                s = s + (int) ch;
-            }
-            s = s % 3;
-        } else {
-            s = 0;
+        int x = value.length() - 1;
+        for (char i : value.toCharArray()) {
+
+            s = (int) (((int) i) * Math.pow(31, x) + s);
+            x = x - 1;
+
         }
-        return s;
+        return abs(s % (table.getSize()));
     }
 
     public boolean find(String value) {
@@ -49,9 +50,11 @@ public class AppService {
         }
         return test;
     }
+
     public boolean add(String v) {
         int index = hachF(v);
         Node n = new Node(v, null);
+        n.isLast=true;
         Node list = table.getNodes()[index];
         Node nc;
         nc = list;

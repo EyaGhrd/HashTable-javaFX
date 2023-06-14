@@ -8,13 +8,13 @@ import tn.usousse.eniso.gte1.stage1.service.AppService;
 
 public class AppController {
     private AppService service;
-
     public AppController(AppService service) {
         this.service = service;
     }
 
     public void add(String name) {
         getService().add(name);
+
     }
     public AppService getService() {
         return service;
@@ -34,4 +34,6 @@ public class AppController {
     public int getSize(){
         return service.getTable().getSize();
     }
+
+    public void resetController(){service=new AppService(new Table(100));}
 }
